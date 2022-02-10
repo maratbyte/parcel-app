@@ -1,49 +1,30 @@
-<p id="notice"><%= notice %></p>
+<h1 class="display-3 text-center mb-4">All Parcels</h1>
 
-<h1>Parcels</h1>
+<% unless notice.nil? %>
+  <div class="row">
+    <div class="col-sm-10 col-md-8 col-lg-6 offset-sm-1 offset-md-2 offset-lg-3">
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill me-1 mb-1" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div> 
+  </div>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Origin</th>
-      <th>Destination</th>
-      <th>Weight</th>
-      <th>Height</th>
-      <th>Length</th>
-      <th>Width</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Phone number</th>
-      <th>Email</th>
-      <th>Distance</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% if @parcels.empty? %>
+  <div class="d-flex flex-column align-items-center">
+    <p class="lead mt-5">Would you like to send your first parcel?</p>
+    <%= link_to "New Parcel", new_parcel_path, class: "card-link btn btn-lg btn-primary" %>
+  </div>
+<% end %>
 
-  <tbody>
-    <% @parcels.each do |parcel| %>
-      <tr>
-        <td><%= parcel.origin %></td>
-        <td><%= parcel.destination %></td>
-        <td><%= parcel.weight %></td>
-        <td><%= parcel.height %></td>
-        <td><%= parcel.length %></td>
-        <td><%= parcel.width %></td>
-        <td><%= parcel.first_name %></td>
-        <td><%= parcel.last_name %></td>
-        <td><%= parcel.phone_number %></td>
-        <td><%= parcel.email %></td>
-        <td><%= parcel.distance %></td>
-        <td><%= parcel.price %></td>
-        <td><%= link_to 'Show', parcel %></td>
-        <td><%= link_to 'Edit', edit_parcel_path(parcel) %></td>
-        <td><%= link_to 'Destroy', parcel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Parcel', new_parcel_path %>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-3" id="parcels">
+  <% @parcels.each do |parcel| %>
+    <div class="col">
+      <%= render parcel, view: "index" %>
+    </div>
+  <% end %>
+</div>

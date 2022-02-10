@@ -1,6 +1,3 @@
-<h1>Editing Parcel</h1>
+<h1 class="display-3 text-center mb-4">Editing parcel #<%= @parcel.id %></h1>
 
-<%= render 'form', parcel: @parcel %>
-
-<%= link_to 'Show', @parcel %> |
-<%= link_to 'Back', parcels_path %>
+<%= render "form", parcel: @parcel, btn_text: "Save" %>

@@ -1,77 +1,76 @@
-<%= form_with(model: parcel) do |form| %>
-  <% if parcel.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>
+<div class="row">
+  <div class="col-10 col-sm-8 col-lg-6 offset-1 offset-sm-2 offset-lg-3">
 
-      <ul>
-        <% parcel.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if parcel.errors.any? %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert"> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-circle-fill me-1 mb-1" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+        </svg>
+        <%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    
+    <%= form_with(model: parcel, class: "row") do |form| %>
 
-  <div class="field">
-    <%= form.label :origin %>
-    <%= form.text_field :origin %>
+      <div class="col-md-6 mb-3">
+        <%= form.label :origin, class: "form-label" %>
+        <%= form.text_field :origin, class: "form-control", placeholder: "City" %>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <%= form.label :destination, class: "form-label" %>
+        <%= form.text_field :destination, class: "form-control", placeholder: "City" %>
+      </div>
+
+
+      <div class="col-6 col-md-3 mb-3">
+        <label for="parcel_weight" class="form-label">Weight <span class="badge rounded-pill bg-secondary">kg</span></label>
+        <%= form.text_field :weight, class: "form-control" %>
+      </div>
+      
+      <div class="col-6 col-md-3 mb-3">
+        <label for="parcel_height" class="form-label">Height <span class="badge rounded-pill bg-secondary">cm</span></label>
+        <%= form.text_field :height, class: "form-control" %>
+      </div>
+
+      <div class="col-6 col-md-3 mb-3">
+        <label for="parcel_length" class="form-label">Length <span class="badge rounded-pill bg-secondary">cm</span></label>
+        <%= form.text_field :length, class: "form-control" %>
+      </div>
+
+      <div class="col-6 col-md-3 mb-3">
+        <label for="parcel_width" class="form-label">Width <span class="badge rounded-pill bg-secondary">cm</span></label>
+        <%= form.text_field :width, class: "form-control" %>
+      </div>
+
+
+      <div class="col-md-6 mb-3">
+        <%= form.label :first_name, class: "form-label" %>
+        <%= form.text_field :first_name, class: "form-control" %>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <%= form.label :last_name, class: "form-label" %>
+        <%= form.text_field :last_name, class: "form-control" %>
+      </div>
+
+
+      <div class="col-md-6 mb-3">
+        <%= form.label :phone_number, class: "form-label" %>
+        <%= form.telephone_field :phone_number, class: "form-control" %>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email, class: "form-control" %>
+      </div>
+
+
+      <div class="d-grid mb-3 mt-1">
+        <%= form.submit "#{btn_text}", class: "btn btn-lg btn-success" %>
+      </div>
+
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= form.label :destination %>
-    <%= form.text_field :destination %>
-  </div>
-
-  <div class="field">
-    <%= form.label :weight %>
-    <%= form.number_field :weight %>
-  </div>
-
-  <div class="field">
-    <%= form.label :height %>
-    <%= form.number_field :height %>
-  </div>
-
-  <div class="field">
-    <%= form.label :length %>
-    <%= form.number_field :length %>
-  </div>
-
-  <div class="field">
-    <%= form.label :width %>
-    <%= form.number_field :width %>
-  </div>
-
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :distance %>
-    <%= form.number_field :distance %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

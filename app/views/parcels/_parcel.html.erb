@@ -1,0 +1,78 @@
+<div class="card" id="<%= dom_id parcel %>">
+  <div class="card-header text-center">
+    <h3 class="card-title mb-1">Parcel #<%= parcel.id %></h3>
+    <p class="card-subtitle text-muted">Sent by: <%= parcel.first_name %> <%= parcel.last_name %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <strong>Origin:</strong>
+      <%= parcel.origin %>
+    </li>
+
+    <li class="list-group-item">
+      <strong>Destination:</strong>
+      <%= parcel.destination %>
+    </li>
+
+    <li class="list-group-item">
+      <strong>Weight:</strong>
+      <%= parcel.weight %>kg
+    </li>
+
+    <li class="list-group-item">
+      <strong>Height:</strong>
+      <%= parcel.height %>cm
+    </li>
+
+    <li class="list-group-item">
+      <strong>Length:</strong>
+      <%= parcel.length %>cm
+    </li>
+
+    <li class="list-group-item">
+      <strong>Width:</strong>
+      <%= parcel.width %>cm
+    </li>
+
+    <% if view == "show" %>
+      <li class="list-group-item">
+        <strong>First name:</strong>
+        <%= parcel.first_name %>
+      </li>
+
+      <li class="list-group-item">
+        <strong>Last name:</strong>
+        <%= parcel.last_name %>
+      </li>
+
+      <li class="list-group-item">
+        <strong>Phone number:</strong>
+        <%= parcel.phone_number %>
+      </li>
+
+      <li class="list-group-item">
+        <strong>Email:</strong>
+        <%= parcel.email %>
+      </li>
+    <% end %>
+
+    <li class="list-group-item">
+      <strong>Distance:</strong>
+      <%= parcel.distance %>km
+    </li>
+
+    <li class="list-group-item">
+      <strong>Price:</strong>
+      <%= parcel.price %>RUB
+    </li>
+  </ul>
+  <div class="card-footer d-flex justify-content-center">
+    <% if view == "index" %>
+      <%= link_to "Show", parcel, class: "card-link btn btn-primary" %>
+    <% else %>
+      <%= link_to "All Parcels", parcels_path, class: "card-link btn btn-primary" %>
+    <% end %>
+    <%= link_to "Edit", edit_parcel_path(parcel), class: "card-link btn btn-warning mx-1" %>
+    <%= button_to "Destroy", parcel, method: :delete, class: "btn btn-danger", form_class: "d-inline" %>
+  </div>
+</div>
