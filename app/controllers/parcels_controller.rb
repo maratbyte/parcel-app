@@ -65,6 +65,6 @@ class ParcelsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def parcel_params
-      params.require(:parcel).permit(:origin, :destination, :weight, :height, :length, :width, :first_name, :last_name, :phone_number, :email, :distance, :price)
+      params.require(:parcel).permit(:origin, :destination, :weight, :height, :length, :width, :first_name, :last_name, :phone_number, :email)
     end
 end
