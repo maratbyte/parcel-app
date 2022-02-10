@@ -16,7 +16,7 @@
 
 <% if @parcels.empty? %>
   <div class="d-flex flex-column align-items-center">
-    <p class="lead mt-5">Would you like to send your first parcel?</p>
+    <p class="lead mt-5">There are no Parcels yet. Would you like to send one?</p>
     <%= link_to "New Parcel", new_parcel_path, class: "card-link btn btn-lg btn-primary" %>
   </div>
 <% end %>
