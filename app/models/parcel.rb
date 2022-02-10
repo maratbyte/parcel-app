@@ -1,11 +1,7 @@
 class Parcel < ApplicationRecord
   # Origin and Destination
   # can't have the same name
-  validates :origin,
-    comparison: {
-      other_than: :destination,
-      message: "should differ from Destination"
-    }
+  validate :origin_and_destination_should_differ
   validates :origin, :destination,
     # should be valid city names and contain one or more words divided by either a space or a dash sign
     format: {
@@ -39,6 +35,13 @@ class Parcel < ApplicationRecord
 
 
   before_save :set_distance, :set_price
+
+
+  def origin_and_destination_should_differ
+    if origin.downcase == destination.downcase
+      errors.add(:origin, "Origin and Destination should differ")
+    end
+  end
 
   
   private
