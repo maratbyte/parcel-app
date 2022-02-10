@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @parcel.origin %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @parcel.destination %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @parcel.weight %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @parcel.height %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @parcel.length %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @parcel.width %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @parcel.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @parcel.last_name %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @parcel.phone_number %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @parcel.email %>
+</p>
+
+<p>
+  <strong>Distance:</strong>
+  <%= @parcel.distance %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @parcel.price %>
+</p>
+
+<%= link_to 'Edit', edit_parcel_path(@parcel) %> |
+<%= link_to 'Back', parcels_path %>
