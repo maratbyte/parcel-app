@@ -24,10 +24,16 @@ class ParcelsController < ApplicationController
     @parcel = Parcel.new(parcel_params)
 
     respond_to do |format|
-      if @parcel.save
-        format.html { redirect_to parcel_url(@parcel), notice: "Parcel was successfully created." }
-        format.json { render :show, status: :created, location: @parcel }
-      else
+      begin
+        if @parcel.save
+          format.html { redirect_to parcel_url(@parcel), notice: "Parcel was successfully created." }
+          format.json { render :show, status: :created, location: @parcel }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @parcel.errors, status: :unprocessable_entity }
+        end
+      rescue => e
+        @parcel.errors.add(:base, :route_error, message: e.message)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @parcel.errors, status: :unprocessable_entity }
       end
@@ -37,10 +43,16 @@ class ParcelsController < ApplicationController
   # PATCH/PUT /parcels/1 or /parcels/1.json
   def update
     respond_to do |format|
-      if @parcel.update(parcel_params)
-        format.html { redirect_to parcel_url(@parcel), notice: "Parcel was successfully updated." }
-        format.json { render :show, status: :ok, location: @parcel }
-      else
+      begin
+        if @parcel.update(parcel_params)
+          format.html { redirect_to parcel_url(@parcel), notice: "Parcel was successfully updated." }
+          format.json { render :show, status: :ok, location: @parcel }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @parcel.errors, status: :unprocessable_entity }
+        end
+      rescue => e
+        @parcel.errors.add(:base, :route_error, message: e.message)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @parcel.errors, status: :unprocessable_entity }
       end

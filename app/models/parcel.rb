@@ -5,7 +5,7 @@ class Parcel < ApplicationRecord
   validates :origin, :destination,
     # should be valid city names and contain one or more words divided by either a space or a dash sign
     format: {
-      with: /\A[a-zA-Z]+(?:[ -][a-zA-Z]+)*\z/,
+      with: /\A[a-zA-Zа-яА-Я]+(?:[ -][a-zA-Zа-яА-Я]+)*(?:, [a-zA-Zа-яА-Я]+)*\z/,
       message: "should contain one or more words divided by spaces or dashes"
     },
     # can't have more than 85 characters
@@ -46,7 +46,10 @@ class Parcel < ApplicationRecord
   
   private
     def set_distance
-      self.distance = MapboxServices::DistanceGetter.call(self.origin, self.destination)
+      data = GoogleMapsServices::DistanceMatrix.call(self.origin, self.destination)
+      self.origin = data[:origin]
+      self.destination = data[:destination]
+      self.distance = data[:distance]
     end
 
     def set_price
