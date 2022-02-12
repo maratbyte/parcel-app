@@ -16,7 +16,6 @@ class Parcel < ApplicationRecord
     # are required
     presence: true
   
-  
   # Parcel measurements
   validates :weight, :height, :length, :width,
     # should be positive integers in range 1...300
@@ -53,6 +52,8 @@ class Parcel < ApplicationRecord
     end
 
     def set_price
-      self.price = ParcelServices::PriceCalculator.call(self)
+      volume = self.length * self.height * self.width / 1000000
+      rate = volume < 1 ? 1 : self.weight <= 10 ? 2 : 3
+      self.price = self.distance * rate
     end
 end
