@@ -24,34 +24,49 @@ module GoogleMapsServices
       }
       uri.query = URI.encode_www_form(params)
 
-      response = Net::HTTP.get_response(uri)
-      if response.is_a?(Net::HTTPSuccess)
-        data = JSON.parse(response.body)
+      data = fetch(uri)
+      retries_left = 3
+      while data["status"] == "OVER_QUERY_LIMIT" && retries_left > 0
+        sleep 3
+        data = fetch(uri)
+        retries_left -= 1
+      end
 
-        if data["status"] == "OK"
-          route = data["rows"].first["elements"].first
-
-          case route["status"]
-          when "OK"
-            return {
-              origin: data["origin_addresses"].first,
-              destination: data["destination_addresses"].first,
-              distance: route["distance"]["value"] / 1000
-            }
-          when "NOT_FOUND"
-            if data["origin_addresses"].first.blank?
-              raise RouteError, "Failed to locate the origin city."
-            end
-            raise RouteError, "Failed to locate the destination city."
-          when "ZERO_RESULTS"
-            raise RouteError, "No route could be found between the origin and destination."
-          when "MAX_ROUTE_LENGTH_EXCEEDED"
-            raise RouteError, "Requested route is too long and cannot be processed"
-          end
-        end
+      unless data["status"] == "OK"
         raise RequestError, data["status"]
       end
-      raise ConnectionError
+
+      route = data["rows"].first["elements"].first
+      case route["status"]
+      when "OK"
+        return {
+          origin: data["origin_addresses"].first,
+          destination: data["destination_addresses"].first,
+          distance: route["distance"]["value"] / 1000
+        }
+      when "NOT_FOUND"
+        if data["origin_addresses"].first.blank?
+          raise RouteError, "Failed to locate the origin city."
+        end
+        raise RouteError, "Failed to locate the destination city."
+      when "ZERO_RESULTS"
+        raise RouteError, "No route could be found between the origin and destination."
+      when "MAX_ROUTE_LENGTH_EXCEEDED"
+        raise RouteError, "Requested route is too long and cannot be processed"
+      end
     end
+
+    private
+      def fetch(uri, retries_left = 3)
+        if retries_left == 0
+          raise ConnectionError
+        end
+        response = Net::HTTP.get_response(uri)
+        unless response.is_a?(Net::HTTPSuccess)
+          sleep 1
+          fetch(uri, retry_left - 1)
+        end
+        JSON.parse(response.body)
+      end
   end
 end  

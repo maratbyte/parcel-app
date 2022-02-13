@@ -1,29 +1,25 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  origin: MyString
-  destination: MyString
-  weight: 1
-  height: 1
-  length: 1
-  width: 1
-  first_name: MyString
-  last_name: MyString
-  phone_number: 
-  email: 
-  distance: 1
-  price: 1
+  origin: Seattle
+  destination: Vancouver
+  weight: 25
+  height: 50
+  length: 50
+  width: 50
+  first_name: John
+  last_name: Doe
+  phone_number: 7498327492
+  email: john@doe.com
 
 two:
-  origin: MyString
-  destination: MyString
-  weight: 1
-  height: 1
-  length: 1
-  width: 1
-  first_name: MyString
-  last_name: MyString
-  phone_number: 
-  email: 
-  distance: 1
-  price: 1
+  origin: Krasnodar
+  destination: Moscow
+  weight: 50
+  height: 100
+  length: 100
+  width: 100
+  first_name: Marat
+  last_name: Byte
+  phone_number: 89024933311
+  email: maratbyte@ya.ru

@@ -3,10 +3,10 @@ class Parcel < ApplicationRecord
   # can't have the same name
   validate :origin_and_destination_should_differ
   validates :origin, :destination,
-    # should be valid city names and contain one or more words divided by either a space or a dash sign
+    # should be a valid city name; state and country are optional
     format: {
-      with: /\A[a-zA-Zа-яА-Я]+(?:[ -][a-zA-Zа-яА-Я]+)*(?:, [a-zA-Zа-яА-Я]+)*\z/,
-      message: "should contain one or more words divided by spaces or dashes"
+      with: /\A[a-zA-Zа-яА-Я]+(?:[ -][a-zA-Zа-яА-Я]+)*(?:,? [a-zA-Zа-яА-Я]+(?:[ -][a-zA-Zа-яА-Я]+)*)*\z/,
+      message: "Format: City (optional: State/Country)"
     },
     # can't have more than 85 characters
     length: {
