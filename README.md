@@ -47,7 +47,7 @@ The app will ask your to enter the following information about the parcel you wa
 * **Weight** (kg), **length** (cm), **width** (cm) and **height** (cm) of the package
   * They should be whole numbers
 * **Origination** & **Destination** cities
-  * They should be valid city names and contain one or more words separated by either a space or a dash sign
+  * They should be valid city names and contain one or more words separated by either a space or a dash sign. You can also enter an optional state and/or country (separate them with commas).
 * Your name and contact information
 
 
