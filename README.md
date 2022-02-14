@@ -15,6 +15,11 @@ To get started with the app, clone the repo and change into the project director
 $ cd parcel-delivery-app
 ```
 
+Install required gems
+```bash
+$ bundle install
+```
+
 Create a database and run migrations
 ```bash
 $ rails db:create
@@ -26,8 +31,8 @@ You can also seed the database with initial fake data (optional)
 $ rails db:seed
 ```
 
-Next, run tests to verify that everything is working
-**Warning:** sometimes a couple tests may fail due to hitting a query limit (app uses Google Maps API to calculate distance). This issue will be fixed in the nearest future.
+Next, run tests to verify that everything is working. 
+**Warning:** occasionally a couple tests may fail due to hitting a query limit (app uses Google Maps API to calculate distance). This issue will be fixed in the nearest future.
 ```bash
 $ rails test:all
 ```
