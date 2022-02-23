@@ -31,7 +31,6 @@ You can also seed the database with initial fake data (optional)
 $ rails db:seed
 ```
 
-<<<<<<< HEAD
 Next, run tests to verify that everything is working
 =======
 Next, run tests to verify that everything is working. 
