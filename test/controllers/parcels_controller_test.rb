@@ -3,6 +3,34 @@ require "test_helper"
 class ParcelsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @parcel = parcels(:one)
+    body = '{
+      "destination_addresses": [
+        "Vancouver, BC, Canada"
+      ],
+      "origin_addresses": [
+        "Seattle, WA, USA"
+      ],
+      "rows": [
+        {
+          "elements": [
+            {
+              "distance": {
+                "text": "229 km",
+                "value": 229458
+              },
+              "duration": {
+                "text": "2 hours 35 mins",
+                "value": 9288
+              },
+              "status": "OK"
+            }
+          ]
+        }
+      ],
+      "status": "OK"
+    }'
+    stub_request(:get, "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=Vancouver&key=AIzaSyAW3tBJay7F7PS6KUG9Yy2GwL1xYg8PeNY&origins=Seattle&units=metric").
+      to_return(status: 200, body: body, headers: {})
   end
 
   teardown do

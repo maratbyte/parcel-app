@@ -1,6 +1,37 @@
 require "test_helper"
 
 class ParcelTest < ActiveSupport::TestCase
+  setup do
+    body = '{
+      "destination_addresses": [
+        "Dallas, TX, USA"
+      ],
+      "origin_addresses": [
+        "Houston, TX, USA"
+      ],
+      "rows": [
+        {
+          "elements": [
+            {
+              "distance": {
+                "text": "314 km",
+                "value": 314149
+              },
+              "duration": {
+                "text": "2 hours 53 mins",
+                "value": 10393
+              },
+              "status": "OK"
+            }
+          ]
+        }
+      ],
+      "status": "OK"
+    }'
+    stub_request(:get, "https://maps.googleapis.com/maps/api/distancematrix/json?destinations=Dallas&key=AIzaSyAW3tBJay7F7PS6KUG9Yy2GwL1xYg8PeNY&origins=Huston%20TX&units=metric").
+      to_return(status: 200, body: body, headers: {})
+  end
+
   test "invalid if any of the fields is empty" do
     parcel = Parcel.new(
       origin: "",
@@ -154,7 +185,7 @@ class ParcelTest < ActiveSupport::TestCase
 
   test "that distance and price are set before save" do
     parcel = Parcel.create(
-      origin: "Huston",
+      origin: "Huston TX",
       destination: "Dallas",
       weight: 25,
       height: 50,
@@ -171,7 +202,7 @@ class ParcelTest < ActiveSupport::TestCase
 
   test "that when volume is less than one price equals distance" do
     parcel = Parcel.create(
-      origin: "Huston",
+      origin: "Huston TX",
       destination: "Dallas",
       weight: 25,
       height: 50,
@@ -187,7 +218,7 @@ class ParcelTest < ActiveSupport::TestCase
 
   test "that when volume is greater or equal to 1 and weight is less or equal to 10 price is double of distance" do
     parcel = Parcel.create(
-      origin: "Huston",
+      origin: "Huston TX",
       destination: "Dallas",
       weight: 10,
       height: 100,
@@ -203,7 +234,7 @@ class ParcelTest < ActiveSupport::TestCase
 
   test "that when volume is greater or equal to 1 and weight is greater than 10 price is triple of distance" do
     parcel = Parcel.create(
-      origin: "Huston",
+      origin: "Huston TX",
       destination: "Dallas",
       weight: 50,
       height: 100,
