@@ -27,7 +27,6 @@ $ rails db:seed
 ```
 
 Next, run tests to verify that everything is working
-**Warning:** sometimes a couple tests may fail due to hitting a query limit (app uses Google Maps API to calculate distance). This issue will be fixed in the nearest future.
 ```bash
 $ rails test:all
 ```
