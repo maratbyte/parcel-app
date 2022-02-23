@@ -31,11 +31,7 @@ You can also seed the database with initial fake data (optional)
 $ rails db:seed
 ```
 
-Next, run tests to verify that everything is working
-=======
 Next, run tests to verify that everything is working. 
-**Warning:** occasionally a couple tests may fail due to hitting a query limit (app uses Google Maps API to calculate distance). This issue will be fixed in the nearest future.
->>>>>>> 103929a65f257f120fbd3dc40b7f5683cb824a98
 ```bash
 $ rails test:all
 ```
