@@ -15,6 +15,11 @@ To get started with the app, clone the repo and change into the project director
 $ cd parcel-delivery-app
 ```
 
+Install required gems
+```bash
+$ bundle install
+```
+
 Create a database and run migrations
 ```bash
 $ rails db:create
@@ -26,7 +31,12 @@ You can also seed the database with initial fake data (optional)
 $ rails db:seed
 ```
 
+<<<<<<< HEAD
 Next, run tests to verify that everything is working
+=======
+Next, run tests to verify that everything is working. 
+**Warning:** occasionally a couple tests may fail due to hitting a query limit (app uses Google Maps API to calculate distance). This issue will be fixed in the nearest future.
+>>>>>>> 103929a65f257f120fbd3dc40b7f5683cb824a98
 ```bash
 $ rails test:all
 ```
@@ -41,7 +51,7 @@ The app will ask your to enter the following information about the parcel you wa
 * **Weight** (kg), **length** (cm), **width** (cm) and **height** (cm) of the package
   * They should be whole numbers
 * **Origination** & **Destination** cities
-  * They should be valid city names and contain one or more words separated by either a space or a dash sign
+  * They should be valid city names and contain one or more words separated by either a space or a dash sign. You can also enter an optional state and/or country (separate them with commas).
 * Your name and contact information
 
 
